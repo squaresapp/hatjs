@@ -1,0 +1,10 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"outFile": "+build/hat.js",
+	},
+	"exclude": [
+		"**/+build/**/*.ts",
+		"**/*.cover.ts",
+	],
+}

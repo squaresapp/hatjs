@@ -1,0 +1,11 @@
+{
+	"name": "hatjs",
+	"author": "Paul Gordon",
+	"description": "",
+	"version": "1.0.0",
+	"main": "hat.js",
+	"scripts": {
+		"bundle": "tsc -p tsconfig.release.json && terser ./+build/hat.debug.js > ./+build/hat.min.js"
+	},
+	"license": "MIT"
+}
