@@ -1,11 +1,33 @@
 {
 	"name": "hatjs",
 	"author": "Paul Gordon",
-	"description": "",
+	"description": "Companion library for HotJS.",
 	"version": "1.0.0",
-	"main": "hat.js",
-	"scripts": {
-		"bundle": "tsc -p tsconfig.release.json && terser ./+build/hat.debug.js > ./+build/hat.min.js"
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/paul-go/hat"
 	},
-	"license": "MIT"
+	"bugs": {
+		"url": "https://github.com/paul-go/hat/issues"
+	},
+	"main": "hat.js",
+	"browser": "hat.js",
+	"module": "hat.esm.js",
+	"types": "hat.d.ts",
+	"files": [
+		"LICENSE.txt",
+		"readme.md",
+		"hat.js",
+		"hat.min.js",
+		"hat.d.ts",
+		"hat.d.ts.map",
+		"hat.esm.js"
+	],
+	"scripts": {
+		"test": "exit 0",
+		"esm": "sed 's/\"use strict\";/export/' ./+build/hat.js > ./+build/hat.esm.js",
+		"bundle": "tsc -p tsconfig.release.json && terser ./+build/hat.debug.js > ./+build/hat.min.js && npm run esm",
+		"release": "npm run bundle && cd ./+build && cp ../package.json ./package.json && np"
+	}
 }
