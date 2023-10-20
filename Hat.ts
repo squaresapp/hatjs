@@ -16,18 +16,65 @@ namespace Hat
 		(new (...args: any) => T);
 	
 	/**
-	 * Marks the specified class as a Hat.
+	 * Marks the specified class as a Hat, and returns a chainable
+	 * function to allow the Hat to respond to signaling functions.
 	 */
 	export function wear(hat: IHat)
 	{
-		const array = hats.get(hat.head) || [];
-		array.push(hat);
-		hats.set(hat.head, array);
+		const names = getConstructorClassNames(hat);
+		const hatsArray = hats.get(hat.head) || [];
+		hatsArray.push(hat);
+		hats.set(hat.head, hatsArray);
 		(hat.head as any)._hat = hat;
-		
-		const names = getConstructorClassName(hat);
 		hat.head.classList.add(...names);
+		
+		const result = {
+			wear<H extends F, F extends (...args: any[]) => void>(signal: F, handler: H)
+			{
+				const name = getSignalClassName(signal);
+				const signalsArray = signals.get(hat.head) || [];
+				signalsArray.push([signal, handler.bind(hat)]);
+				signals.set(hat.head, signalsArray);
+				hat.head.classList.add(name);
+				return result;
+			}
+		};
+		
+		return result;
 	}
+	
+	/**
+	 * Sends a call signal to all Hats in the document that have subscribed
+	 * to invokations of the specified signal function.
+	 */
+	export function signal<A extends any[], F extends (...args: A) => void>(ref: F, ...args: A)
+	{
+		const cls = getSignalClassName(ref);
+		const elements = document.body.getElementsByClassName(cls);
+		
+		for (let i = -1; ++i < elements.length;)
+		{
+			const e = elements.item(i);
+			if (!e)
+				continue;
+			
+			const signalsArray = signals.get(e) || [];
+			for (const [signalFunction, boundFunction] of signalsArray)
+				if (signalFunction === ref)
+					boundFunction(...args);
+		}
+	}
+	
+	/** */
+	function getSignalClassName(fn: (...args: any) => void)
+	{
+		if (!fn.name)
+			throw new Error("Cannot use an unnamed function as signaler");
+		
+		return signalPrefix + fn.name;
+	}
+	
+	const signalPrefix = "signal:";
 	
 	/**
 	 * @returns An array that contains all that hats that have been assigned to
@@ -231,7 +278,7 @@ namespace Hat
 		if (!e)
 			throw "Cannot perform this method using the specified node.";
 		
-		const names = hatNames.get(type);
+		const names = ctorNames.get(type);
 		
 		// If there is no class name found for the specified hat type,
 		// this could possibly be an error (meaning that the hat type
@@ -272,15 +319,15 @@ namespace Hat
 	
 	/**
 	 * Returns a unique CSS class name that corresponds to the type
-	 * of the hat. This is used for querying via the .under() function.
+	 * of the object.
 	 */
-	function getConstructorClassName(hat: IHat)
+	function getConstructorClassNames(object: object)
 	{
-		const existingNames = hatNames.get(hat.constructor);
+		const existingNames = ctorNames.get(object.constructor);
 		if (existingNames)
 			return existingNames;
 		
-		const ctors: any[] = [hat.constructor];
+		const ctors: any[] = [object.constructor];
 		const names: string[] = [];
 		
 		for (;;)
@@ -306,15 +353,16 @@ namespace Hat
 		for (let i = ctors.length; i-- > 0;)
 		{
 			const ctor = ctors[i];
-			if (!hatNames.has(ctor))
-				hatNames.set(ctor, names.slice(i));
+			if (!ctorNames.has(ctor))
+				ctorNames.set(ctor, names.slice(i));
 		}
 		
 		return names;
 	}
 	
-	const hatNames = new WeakMap<Function, string[]>();
+	const ctorNames = new WeakMap<Function, string[]>();
 	const hats = new WeakMap<Element, object[]>();
+	const signals = new WeakMap<object, [Function, Function][]>();
 	let inc = 0;
 	
 	/**
