@@ -22,7 +22,8 @@
 			"esnext.asynciterable"
 		]
 	},
-	"exclude": [
-		"**/+build/**/*.ts",
+	"include": [
+		"Hat.ts",
+		"Hat.cover.ts",
 	]
 }

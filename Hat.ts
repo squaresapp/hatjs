@@ -497,11 +497,17 @@ namespace Hat
 			return this.map();
 		}
 	}
-	
-	declare var module: any;
-	if (typeof module === "object")
-		Object.assign(module.exports, { Hat });
 }
 
-//@ts-ignore
+//@ts-ignore CommonJS compatibility
 if (typeof module === "object") Object.assign(module.exports, { Hat });
+
+// ES module compatibility
+declare module "hatjs"
+{
+	const __export: { Hat: typeof Hat };
+	export = __export;
+}
+
+// The comment and + prefix is removed during npm run bundle
+//+ export { Hat }

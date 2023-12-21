@@ -1,15 +1,15 @@
 {
 	"name": "hatjs",
 	"author": "Paul Gordon",
-	"description": "Companion library for HotJS.",
+	"description": "Controller library for RawJS.",
 	"version": "1.0.1",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/paul-go/hat"
+		"url": "https://github.com/squaresapp/hat"
 	},
 	"bugs": {
-		"url": "https://github.com/paul-go/hat/issues"
+		"url": "https://github.com/squaresapp/hat/issues"
 	},
 	"main": "hat.js",
 	"browser": "hat.js",
@@ -27,7 +27,7 @@
 	"scripts": {
 		"test": "exit 0",
 		"esm": "sed 's/\"use strict\";/export/' ./+build/hat.js > ./+build/hat.esm.js",
-		"bundle": "tsc -p tsconfig.release.json && terser ./+build/hat.debug.js > ./+build/hat.min.js && npm run esm",
-		"release": "npm run bundle && cd ./+build && cp ../package.json ./package.json && np"
+		"bundle": "tsc -p tsconfig.release.json && terser ./+build/hat.js > ./+build/hat.min.js && npm run esm",
+		"release": "npm run bundle && cd ./+build && cp ../package.json ./package.json && np && cp ./package.json ../package.json"
 	}
 }
