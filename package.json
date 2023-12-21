@@ -2,7 +2,7 @@
 	"name": "@squaresapp/hatjs",
 	"author": "Paul Gordon",
 	"description": "Controller library for RawJS.",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
