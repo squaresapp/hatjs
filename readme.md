@@ -3,8 +3,7 @@
 
 Companion library for RawJS. Readme coming.
 
-Installation
-
+## Installation
 ```
 npm install @squaresapp/hatjs
 ```
