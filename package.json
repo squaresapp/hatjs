@@ -1,5 +1,5 @@
 {
-	"name": "hatjs",
+	"name": "@squaresapp/hatjs",
 	"author": "Paul Gordon",
 	"description": "Controller library for RawJS.",
 	"version": "1.0.1",
