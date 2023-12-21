@@ -15,6 +15,9 @@
 	"browser": "hat.js",
 	"module": "hat.esm.js",
 	"types": "hat.d.ts",
+	"publishConfig": {
+		"access": "public"
+	},
 	"files": [
 		"LICENSE.txt",
 		"readme.md",
