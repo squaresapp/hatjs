@@ -1,4 +1,4 @@
 
 # Hat
 
-Companion library for HotJS. Readme coming.
+Companion library for RawJS. Readme coming.
