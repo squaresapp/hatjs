@@ -1,15 +1,15 @@
 {
 	"name": "@squaresapp/hatjs",
 	"author": "Paul Gordon",
-	"description": "Controller library for RawJS.",
+	"description": "Utility Functions For Anonymous Controller Classes",
 	"version": "1.0.2",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/squaresapp/hat"
+		"url": "https://github.com/squaresapp/hatjs"
 	},
 	"bugs": {
-		"url": "https://github.com/squaresapp/hat/issues"
+		"url": "https://github.com/squaresapp/hatjs/issues"
 	},
 	"main": "hat.js",
 	"browser": "hat.js",
