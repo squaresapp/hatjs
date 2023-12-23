@@ -4,6 +4,12 @@
 HatJS is a library designed to support the Anonymous Controller Class (ACC) pattern. Technically, you don't need any library to implement this pattern into your code, but using HatJS adds some helpful utility functions that allow you to quickly discover the anonymous controllers that are associated with a given HTML element.
 
 ## Installation
+
+From jsDelivr:
+```html
+<script src="https://cdn.jsdelivr.net/npm/@squaresapp/hatjs/hat.min.js"></script>
+```
+Typings
 ```
 npm install @squaresapp/hatjs
 ```
