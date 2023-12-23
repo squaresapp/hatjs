@@ -16,7 +16,7 @@ namespace Hat
 		(new (...args: any) => T);
 	
 	/**
-	 * Marks the specified class as a Hat, and returns a chainable
+	 * Marks an object as a Hat, and returns a chainable
 	 * function to allow the Hat to respond to signaling functions.
 	 */
 	export function wear(hat: IHat)
