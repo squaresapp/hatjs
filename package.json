@@ -2,7 +2,7 @@
 	"name": "@squaresapp/hatjs",
 	"author": "Paul Gordon",
 	"description": "Utility Functions For Anonymous Controller Classes",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"license": "MIT",
 	"repository": {
 		"type": "git",

@@ -30,9 +30,13 @@ namespace Hat
 	
 	/**
 	 * Enables a hat to have the ability to respond to signaling functions.
+	 * Marks the hat argument as a hat, if it has not been done so already.
 	 */
 	export function watch<H extends F, F extends (...args: any[]) => void>(hat: IHat, signal: F, handler: H)
 	{
+		if ((hats.get(hat.head) || []).length === 0)
+			Hat.wear(hat);
+		
 		const name = getSignalClassName(signal);
 		const signalsArray = signals.get(hat.head) || [];
 		signalsArray.push([signal, handler.bind(hat)]);

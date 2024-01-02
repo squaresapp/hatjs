@@ -85,3 +85,7 @@ The HatJS library is a stateless library of utility functions that allow you to 
 `Hat.over()` -  Scans upward through the DOM, starting at the specified Node, looking for the first element wearing a Hat of the specified type. (Throws an exception)
 
 `Hat.under()` - Finds all descendent elements that have an attached Hat of the specified type, that exist underneath the specified Node or Hat.
+
+`Hat.watch(object, signal, handler)` - Enables a hat to have the ability to respond to signaling functions.
+
+`Hat.signal(SignalingFunction, ...signalingFunctionArguments)` - Invokes the watch handlers on all other hats in the DOM that have subscribed to the specified signaling function, and passes the specified arguments to each call.
