@@ -57,8 +57,8 @@ class SomeComponent {
 	
 	private remove() {
 		// Remove the component's .head element from the DOM,
-		// which will by extension garbage collect this instance of
-		// SomeComponent.
+		// which will by extension garbage collect this instance
+		// of SomeComponent.
 		this.head.remove();
 	}
 }
