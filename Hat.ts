@@ -16,8 +16,7 @@ namespace Hat
 		(new (...args: any) => T);
 	
 	/**
-	 * Marks an object as a Hat, and returns a chainable
-	 * function to allow the Hat to respond to signaling functions.
+	 * Marks an object as a Hat. (Or formally–an "Anonymous Controller Class").
 	 */
 	export function wear(hat: IHat)
 	{
@@ -27,20 +26,18 @@ namespace Hat
 		hats.set(hat.head, hatsArray);
 		(hat.head as any)._hat = hat;
 		hat.head.classList.add(...names);
-		
-		const result = {
-			wear<H extends F, F extends (...args: any[]) => void>(signal: F, handler: H)
-			{
-				const name = getSignalClassName(signal);
-				const signalsArray = signals.get(hat.head) || [];
-				signalsArray.push([signal, handler.bind(hat)]);
-				signals.set(hat.head, signalsArray);
-				hat.head.classList.add(name);
-				return result;
-			}
-		};
-		
-		return result;
+	}
+	
+	/**
+	 * Enables a hat to have the ability to respond to signaling functions.
+	 */
+	export function watch<H extends F, F extends (...args: any[]) => void>(hat: IHat, signal: F, handler: H)
+	{
+		const name = getSignalClassName(signal);
+		const signalsArray = signals.get(hat.head) || [];
+		signalsArray.push([signal, handler.bind(hat)]);
+		signals.set(hat.head, signalsArray);
+		hat.head.classList.add(name);
 	}
 	
 	/**
